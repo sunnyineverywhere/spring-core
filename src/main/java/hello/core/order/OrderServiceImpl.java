@@ -22,9 +22,15 @@ public class OrderServiceImpl implements OrderService{
     // 인터페이스에만 의존하도록 설계 변경
 
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 코드 변경 -> OCP 위반
-    private DiscountPolicy discountPolicy; // DIP는 지킴
+    private final DiscountPolicy discountPolicy; // DIP는 지킴
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
