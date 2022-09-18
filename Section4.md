@@ -1,6 +1,6 @@
 # 4. 스프링 컨테이너와 스프링 빈
 
-```java
+```java:
 ApplicationContext applicationContext = new ApplicationConfigApplicationContext(AppConfig.context);
 ```
 ApplicationContext: 스프링 컨테이너, 인터페이스
@@ -23,7 +23,7 @@ ApplicationContext: 스프링 컨테이너, 인터페이스
 동적인 인스턴스 객체 연결관계를 스프링이 연결함
 
 ### 컨테이너에 등록된 빈 조회
-```java
+```java:
             BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
 
             if(beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION){
@@ -37,3 +37,24 @@ BeanDefinition.ROLE_INFRASTRUCTURE: 스프링에서 기본적으로 등록된 �
 ### 스프링 빈 조회 - 상속관계
 모든 자바 객체의 최고 부모인 'Object'타입으로 조회 -> 모든 스프링 빈을 조회
 부모 타입으로 조회하면 자식 타입도 다 끌려나온다(= 함께 조회한다)
+
+### BeanFactory와 ApplicationContext
+**BeanFactory**
+- 스프링 컨테이너의 최상위 인터페이스
+- 스프링 빈을 관리하고 조회하는 역할: 지금까지 우리가 사용했던 대부분의 기능은 BeanFactory가 하는 일(getBean() 같은 것)
+
+**ApplicationContext**
+- BeanFactory의 기능을 모두 상속받아서 제공
+- 애플리케이션을 개발할 때 빈을 관리하고 조회하는 기능 + 수많은 부가기능: BeanFactory 이외에도 메세징, 환경설정, 이벤트 퍼블리셔, 리소스 로더 등도 상속 
+    - MessageSource: 메세지 소스를 활용한 국제화 기능
+    - EnvironmentCapable: 로컬, 개발, 운영 등을 구분해서 처리
+    - ApplicationEventPublisher: 이벤트를 발행하고 구독하는 모델을 편리하게 지원
+    - ResourceLoader: 파일, 클래스패스, 외부 등에서 리소스를 편리하게 조회
+
+=> 부가기능이 포함된 ApplicationContext를 사용(BeanFactory, ApplicationContext 등을 스프링 컨테이너라 칭함)
+
+### 다양한 설정 형식 지원 - 자바 코드, XML
+스프링 컨테이너는 다양한 형식의 설정 정보를 받아들일 수 있게 유연하게 설계(자바 코드, XML, Groovy 등등)
+- 자바 코드: AnnotationConfig, ApplicationContext(AppConfig.class)
+- xml: (요즘은 거의 안 씀) xml이라는 파일을 따로 작성하여 설정해줌. 컴파일 없이 빈 설정 정보를 변경할 수 있다는 장점
+- 
