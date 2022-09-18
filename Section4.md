@@ -33,3 +33,7 @@ ApplicationContext: 스프링 컨테이너, 인터페이스
 ```
 BeanDeafinition.ROLE_APPLICATION: 개발을 위해 등록한 빈
 BeanDefinition.ROLE_INFRASTRUCTURE: 스프링에서 기본적으로 등록된 빈
+
+### 스프링 빈 조회 - 상속관계
+모든 자바 객체의 최고 부모인 'Object'타입으로 조회 -> 모든 스프링 빈을 조회
+부모 타입으로 조회하면 자식 타입도 다 끌려나온다(= 함께 조회한다)
