@@ -57,4 +57,11 @@ BeanDefinition.ROLE_INFRASTRUCTURE: 스프링에서 기본적으로 등록된 �
 스프링 컨테이너는 다양한 형식의 설정 정보를 받아들일 수 있게 유연하게 설계(자바 코드, XML, Groovy 등등)
 - 자바 코드: AnnotationConfig, ApplicationContext(AppConfig.class)
 - xml: (요즘은 거의 안 씀) xml이라는 파일을 따로 작성하여 설정해줌. 컴파일 없이 빈 설정 정보를 변경할 수 있다는 장점
-- 
+
+
+### 스프링 빈 설정 메타 정보 - BeanDefinition
+- 다양한 설정 형식 지원: BeanDefinition이라는 추상화
+  - 역할과 구현을 개념적으로 나눈 것(xml, 자바 코드...)
+- ApplicationContext를 구현한 AnnotationConfigApplicationContext
+  - AnnotatedBeanDefinitionReader: AppConfig 설정 정보를 읽는다(설정 정보 메타데이터처럼) -> BeanDefinition을 생성
+- Bean 설정 정보를 읽어서 BeanDefinition으로 추상화하여 사용(실제로 정의해서 사용하는 경우는 거의 없음)
